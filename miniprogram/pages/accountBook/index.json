@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "cloud-tip-modal": "/components/cloudTipModal/index"
+    "account-tiem": "/components/accountItem/index",
+    "mp-loading": "weui-miniprogram/loading/loading"
   }
 }
