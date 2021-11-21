@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "account-tiem": "/components/accountItem/index",
-    "mp-loading": "weui-miniprogram/loading/loading"
+    "account-item": "/components/accountItem/index"
   }
 }

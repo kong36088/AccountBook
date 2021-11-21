@@ -1,31 +1,24 @@
 <!--index.wxml-->
-<view class="container" data-weui-theme="dark">
+<view class="page">
 
-  <view class="fund_top_tips left">总金额：{{total_fund}}</view>
-  <view class="fund_top_tips left">流动资金：{{liqiuid_fund}}</view>
-  <view class="fund_top_tips left">非流动资金：{{illiqiuid_fund}}</view>
-
-  <view class="divdeLine"></view>
-  <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
-    <view class="power_info" data-index="{{index}}" bindtap="onClickPowerInfo">
-      <view class="power_info_text">
-        <view class="power_info_text_title">{{power.title}}</view>
-        <view class="power_info_text_tip">{{power.tip}}</view>
-      </view>
-      <image wx:if="{{!power.showItem}}" class="power_info_more" src="../../images/arrow.svg"></image>
-      <image wx:if="{{power.showItem}}" class="power_info_less" src="../../images/arrow.svg"></image>
-    </view>
-    <view wx:if="{{power.showItem}}">
-      <view wx:key="title" wx:for="{{power.item}}">
-        <view class="line"></view>
-        <view class="power_item" bindtap="jumpPage" data-page="{{item.page}}">
-          <view class="power_item_title">{{item.title}}</view>
-          <image class="power_item_icon" src="../../images/arrow.svg"></image>
-        </view>
-      </view>
-    </view>
+  <view class="page_hd">
+    <button class="btn-yellow">+</button>
+    <mp-cells ext-class="my-cells" title="总概览">
+      <mp-cell value="总金额" footer="{{total_fund}}"></mp-cell>
+      <mp-cell value="流动资金" footer="{{liqiuid_fund}}"></mp-cell>
+      <mp-cell value="非流动资金" footer="{{illiqiuid_fund}}"></mp-cell>
+    </mp-cells>
   </view>
 
-  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
+  <view class="page__bd">
+    <!-- <view class="divdeLine"></view> -->
+    <mp-cells ext-class="my-cells" title="明细">
+      <mp-cell value="招行" footer="1234元"></mp-cell>
+    </mp-cells>
+  </view>
+
+  <view class="page__ft">
+    <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{tarbarPros}}" bindchange="navbarChanged"></mp-tabbar>
+  </view>
 
 </view>
