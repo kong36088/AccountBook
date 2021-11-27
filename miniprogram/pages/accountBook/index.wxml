@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="page">
-  <navigator url='/pages/editItem/index?id=1&name="jack"'>
+  <navigator url='/pages/editItem/index?charater={{currentCharater}}'>
     <button  wx:if="{{currentCharater != 'total'}}" class="btn-yellow">+</button>
   </navigator>
   <mp-cells ext-class="my-cells" title="总概览">

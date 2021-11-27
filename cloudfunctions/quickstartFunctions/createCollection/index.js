@@ -1,4 +1,4 @@
-const cloud = require('wx-server-sdk');
+const cloud = require('../addItem/node_modules/wx-server-sdk');
 
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV

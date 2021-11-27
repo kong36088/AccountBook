@@ -3,9 +3,9 @@
   <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}" delay="2000"></mp-toptips>
 
   <view class="">
-  <mp-cells>
-    <mp-cell value="账户" footer="猪猪"></mp-cell>
-  </mp-cells>
+    <mp-cells>
+      <mp-cell value="账户" footer="{{charaters[form.charater].name}}"></mp-cell>
+    </mp-cells>
   </view>
   <mp-form id="form" rules="{{rules}}" models="{{form}}">
     <mp-cells>
@@ -26,6 +26,5 @@
       <button style="margin-top:20rpx" class="weui-btn" type="primary" bindtap="weSubmitForm">确定</button>
       <button style="margin-top:20rpx" type="warn" bindtap="restForm" plain>取消</button>
     </view>
-  </mp-form>
-
+  </mp-form>  
 </view>

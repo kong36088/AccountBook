@@ -4,13 +4,18 @@ const {
   envList
 } = require('../../envList.js');
 
+import vars from "../../vars.js"
+var CHARATERS = vars[0]
+
 Page({
   data: {
     form: {
       item: '',
       value: '',
       type: 'liquid',
+      charater: CHARATERS.dog.value
     },
+    charaters:CHARATERS,
     errorMsg: '', // 验证表单显示错误信息
     rules: [{
         name: 'item',
@@ -31,7 +36,7 @@ Page({
             message: '请填写金额'
           },
           {
-            maxlength: 10,
+            maxlength: 12,
             message: "金额长度过长"
           }
         ]
@@ -102,11 +107,14 @@ Page({
     })
   },
   onLoad(options) {
-    this.setData({
-      item: '',
-      value:'',
-      type: 'liquid'
-    })
+    var keys = ['item', 'value', 'type', 'charater'];
+    for (var k in keys) {
+      var key = keys[k];
+      if(options.hasOwnProperty(key)) {
+        this.setData({[`form.${key}`]: options[key]})
+      }
+    }
+    console.log(this.data.form)
   }
 
 });
