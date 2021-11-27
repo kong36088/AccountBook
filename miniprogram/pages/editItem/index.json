@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "account-item": "/components/accountItem/index",
+    "mp-form": "weui-miniprogram/form/form"
+  }
+}

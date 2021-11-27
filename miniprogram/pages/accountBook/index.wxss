@@ -1,11 +1,5 @@
 /**index.wxss**/
 
-page {
-  padding-top: 54rpx;
-  background-color: #f6f6f6;
-  padding-bottom: 60rpx;
-}
-
 .divdeLine {
   background:#E0E3DA;
   width: 100%;

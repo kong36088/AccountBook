@@ -1,0 +1,31 @@
+<!--index.wxml-->
+<view class="page">
+  <mp-toptips msg="{{errorMsg}}" type="error" show="{{errorMsg}}" delay="2000"></mp-toptips>
+
+  <view class="">
+  <mp-cells>
+    <mp-cell value="账户" footer="猪猪"></mp-cell>
+  </mp-cells>
+  </view>
+  <mp-form id="form" rules="{{rules}}" models="{{form}}">
+    <mp-cells>
+      <mp-cell prop="value" title="存款项">
+        <input bindinput="formInputChange" value="{{form.item}}" data-field="item" class="weui-input" placeholder="请填写存款项目" />
+      </mp-cell>
+      <mp-cell prop="item" title="金额">
+        <input bindinput="formInputChange" value="{{form.value}}" data-field="value" class="weui-input" placeholder="请填写具体的金额" />
+      </mp-cell>
+      <mp-cell prop="type" title="流动性">
+        <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="formInputChange">
+          <mp-checkbox wx:for="{{typeItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.value == form.type}}"></mp-checkbox>
+        </mp-checkbox-group>
+      </mp-cell>
+    </mp-cells>
+    <!--提交按钮-->
+    <view class="submit_btn_wrap">
+      <button style="margin-top:20rpx" class="weui-btn" type="primary" bindtap="weSubmitForm">确定</button>
+      <button style="margin-top:20rpx" type="warn" bindtap="restForm" plain>取消</button>
+    </view>
+  </mp-form>
+
+</view>

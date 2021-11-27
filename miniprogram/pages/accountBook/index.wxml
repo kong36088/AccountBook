@@ -1,19 +1,20 @@
 <!--index.wxml-->
 <view class="page">
-
-  <view class="page_hd">
-    <button class="btn-yellow">+</button>
-    <mp-cells ext-class="my-cells" title="总概览">
-      <mp-cell value="总金额" footer="{{total_fund}}"></mp-cell>
-      <mp-cell value="流动资金" footer="{{liqiuid_fund}}"></mp-cell>
-      <mp-cell value="非流动资金" footer="{{illiqiuid_fund}}"></mp-cell>
-    </mp-cells>
-  </view>
+  <navigator url='/pages/editItem/index?id=1&name="jack"'>
+    <button  wx:if="{{currentCharater != 'total'}}" class="btn-yellow">+</button>
+  </navigator>
+  <mp-cells ext-class="my-cells" title="总概览">
+    <mp-cell value="总金额" footer="{{totalCount.totalFund/100}}"></mp-cell>
+    <mp-cell value="流动资金" footer="{{totalCount.liquidFund/100}}"></mp-cell>
+    <mp-cell value="非流动资金" footer="{{totalCount.illiquidFund/100}}"></mp-cell>
+  </mp-cells>
 
   <view class="page__bd">
     <!-- <view class="divdeLine"></view> -->
     <mp-cells ext-class="my-cells" title="明细">
-      <mp-cell value="招行" footer="1234元"></mp-cell>
+      <view wx:for="{{detailCount}}" wx:key="item" wx:for-item="value">
+        <mp-cell value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
+      </view>
     </mp-cells>
   </view>
 
