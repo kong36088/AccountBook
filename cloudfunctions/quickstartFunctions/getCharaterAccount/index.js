@@ -5,12 +5,12 @@ cloud.init({
 });
 
 const db = cloud.database();
+const _ = db.command
 
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
   try {
-    let keys = ['charater','item', 'value', 'type'];
-    let data = {};
+    let keys = ['charater'];
     for (let k in keys) {
       let key = keys[k];
       if (!event.hasOwnProperty(key) || !event[key]) {
@@ -19,7 +19,6 @@ exports.main = async (event, context) => {
           message: `missing param '${key}'`
         }
       }
-      data[key] = event[key]
     }
 
     await db.collection('account').add({
