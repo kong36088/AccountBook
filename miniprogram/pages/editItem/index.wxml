@@ -16,7 +16,7 @@
         <input bindinput="formInputChange" value="{{form.value}}" data-field="value" class="weui-input" placeholder="请填写具体的金额" />
       </mp-cell>
       <mp-cell prop="type" title="流动性">
-        <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="formInputChange">
+        <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="formInputChange" data-field="type">
           <mp-checkbox wx:for="{{typeItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.value == form.type}}"></mp-checkbox>
         </mp-checkbox-group>
       </mp-cell>

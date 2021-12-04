@@ -6,6 +6,7 @@ const {
 
 import vars from "../../vars.js"
 var CHARATERS = vars[0]
+var FUND_TYPE = vars[1]
 
 Page({
   data: {
@@ -51,12 +52,12 @@ Page({
     ],
     typeItems: [{
         name: '流动',
-        value: 'liquid',
+        value: FUND_TYPE.LIQUID,
         checked: true
       },
       {
         name: '非流动',
-        value: 'illiquid'
+        value: FUND_TYPE.ILLIQUID
       }
     ]
   },
@@ -74,8 +75,9 @@ Page({
     const {
       item,
       value,
-      type
-    } = this.data.form
+      type,
+      charater,
+    } = this.data.form;
     this.selectComponent('#form').validate((valid, errors) => {
       console.log(this.data.form)
       if (!valid) {
@@ -86,12 +88,27 @@ Page({
           })
         }
       } else {
-        wx.showToast({
-          title: '提交成功',
+        wx.cloud.callFunction({
+          name: "addItem",
+          data: {
+            item: item,
+            value: value*100,
+            type: type,
+            charater: charater,
+          },
+        }).then(res => {
+          console.log(res);
+          if (res.result.success) {
+          } else {
+            wx.showToast({
+              title: '失败:' + res.result.message,
+              icon: 'error'
+            });
+          }
+        });
+        wx.navigateBack({
+          delta: 1
         })
-        // wx.navigateBack({
-        //   delta: 1
-        // })
       }
     })
   },
@@ -100,7 +117,7 @@ Page({
     this.setData({
       'form.item': '',
       'form.value': '',
-      'form.type': 'liquid',
+      'form.type': FUND_TYPE.LIQUID,
     })
     wx.navigateBack({
       delta: 1

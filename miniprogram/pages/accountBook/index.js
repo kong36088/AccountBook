@@ -62,6 +62,7 @@ Page({
 
     for (let x in this.data.detailCount) {
       let count = this.data.detailCount[x];
+      count.value = Number(count.value);
       if (charater == CHARATERS.total.value) {
         switch (count.type) {
           case FUND_TYPE.LIQUID:
