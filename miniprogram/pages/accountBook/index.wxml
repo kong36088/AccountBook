@@ -36,7 +36,7 @@
   </view>
 
   <view class="page__ft">
-    <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{tarbarPros}}" bindchange="navbarChanged"></mp-tabbar>
+    <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;z-index: 1000;" list="{{tarbarPros}}" bindchange="navbarChanged"></mp-tabbar>
   </view>
 
 

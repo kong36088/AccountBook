@@ -10,27 +10,27 @@ var FUND_TYPE = vars[1]
 
 const tarbarPros = [{
     "text": "狗子",
-    "iconPath": "/images/狗.png",
-    "selectedIconPath": "/images/狗.png",
+    "iconPath": "http://account-book-1251825572.file.myqcloud.com/狗.png",
+    "selectedIconPath": "http://account-book-1251825572.file.myqcloud.com/狗.png",
     "charater": CHARATERS.dog.value
   },
   {
     "text": "猪猪",
-    "iconPath": "/images/猪.png",
-    "selectedIconPath": "/images/猪.png",
+    "iconPath": "http://account-book-1251825572.file.myqcloud.com/猪.png",
+    "selectedIconPath": "http://account-book-1251825572.file.myqcloud.com/猪.png",
     "charater": CHARATERS.pig.value
   },
   {
     "text": "总账目",
-    "iconPath": "/images/账本.png",
-    "selectedIconPath": "/images/账本.png",
+    "iconPath": "http://account-book-1251825572.file.myqcloud.com/账本.png",
+    "selectedIconPath": "http://account-book-1251825572.file.myqcloud.com/账本.png",
     "charater": CHARATERS.total.value
   }
 ];
 
 const iconPath = {
-  [CHARATERS.dog.value]: "/images/狗.png",
-  [CHARATERS.pig.value]: "/images/猪.png",
+  [CHARATERS.dog.value]: "http://account-book-1251825572.file.myqcloud.com/狗.png",
+  [CHARATERS.pig.value]: "http://account-book-1251825572.file.myqcloud.com/猪.png",
 };
 
 Page({
