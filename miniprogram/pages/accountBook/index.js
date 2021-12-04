@@ -33,17 +33,27 @@ Page({
     currentCharater: CHARATERS.dog.value,
     tarbarPros: tarbarPros,
     totalCount: {
-      totalFund: 12300,
-      liquidFund: 12,
-      illiquidFund: 34
+      totalFund: 0,
+      liquidFund: 0,
+      illiquidFund: 0
     },
-    detailCount: [
-      //   {
-      //   item: "招行",
-      //   value: 123400,
-      //   type: FUND_TYPE.LIQUID,
-      // }
-    ],
+    detailCount: [],
+    // action sheet
+    actionSheet: {
+      showActionSheet: false,
+      groups: [{
+          text: '修改',
+          value: 'update'
+        },
+        {
+          text: '删除',
+          value: 'delete',
+          type: 'warn'
+        }
+      ],
+      selected: '',
+    }
+
   },
   watch: {
     currentCharater: function (newVal) {
@@ -104,8 +114,13 @@ Page({
     }).then(res => {
       console.log(res);
       if (res.result.success) {
+        let detailCount = {};
+        for (let x in res.result.data) {
+          let item = res.result.data[x];
+          detailCount[item._id] = item;
+        }
         this.setData({
-          'detailCount': res.result.data,
+          'detailCount': detailCount,
         });
         this.calcTotalCount(this.data.currentCharater);
       } else {
@@ -115,6 +130,32 @@ Page({
         });
       }
     });
+  },
+  itemClick(e) {
+    this.setData({'actionSheet.selected': e.currentTarget.dataset.id, 'actionSheet.showActionSheet': true})
+    console.log(this.data.actionSheet)
+  },
+  sheetClick(e) {
+    console.log(e)
+    this.setData({
+      'actionSheet.showActionSheet': false
+    });
+    switch (e.detail.value) {
+      case 'update':
+        let charater = this.data.currentCharater;
+        let id = this.data.actionSheet.selected;
+        let item = this.data.detailCount[id].item;
+        let value = this.data.detailCount[id].value/100;
+        let type = this.data.detailCount[id].type;
+        wx.navigateTo({
+          url: `/pages/editItem/index?charater=${charater}&id=${id}&item=${item}&value=${value}&type=${type}`,
+        });
+        break;
+      case 'delete':
+        break;
+      default:
+        break;
+    }
   },
 
   onLoad(options) {

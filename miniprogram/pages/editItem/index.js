@@ -11,12 +11,13 @@ var FUND_TYPE = vars[1]
 Page({
   data: {
     form: {
+      id: '',
       item: '',
       value: '',
-      type: 'liquid',
+      type: FUND_TYPE.LIQUID,
       charater: CHARATERS.dog.value
     },
-    charaters:CHARATERS,
+    charaters: CHARATERS,
     errorMsg: '', // 验证表单显示错误信息
     rules: [{
         name: 'item',
@@ -63,7 +64,6 @@ Page({
   },
 
   formInputChange(e) {
-    console.log(e)
     const {
       field
     } = e.currentTarget.dataset
@@ -88,18 +88,19 @@ Page({
           })
         }
       } else {
+        let action = this.data.form.id ? 'updateItem' : 'addItem';
         wx.cloud.callFunction({
-          name: "addItem",
+          name: action,
           data: {
+            id: this.data.form.id,
             item: item,
-            value: value*100,
+            value: value * 100,
             type: type,
             charater: charater,
           },
         }).then(res => {
           console.log(res);
-          if (res.result.success) {
-          } else {
+          if (res.result.success) {} else {
             wx.showToast({
               title: '失败:' + res.result.message,
               icon: 'error'
@@ -124,11 +125,13 @@ Page({
     })
   },
   onLoad(options) {
-    var keys = ['item', 'value', 'type', 'charater'];
+    var keys = ['id', 'item', 'value', 'type', 'charater'];
     for (var k in keys) {
       var key = keys[k];
-      if(options.hasOwnProperty(key)) {
-        this.setData({[`form.${key}`]: options[key]})
+      if (options.hasOwnProperty(key)) {
+        this.setData({
+          [`form.${key}`]: options[key]
+        })
       }
     }
     console.log(this.data.form)

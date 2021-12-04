@@ -13,9 +13,11 @@
     <!-- <view class="divdeLine"></view> -->
     <mp-cells ext-class="my-cells" title="明细">
       <view wx:for="{{detailCount}}" wx:key="item" wx:for-item="value">
-        <mp-cell wx:if="{{currentCharater == value.charater}}" value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
+        <mp-cell bindtap="itemClick" wx:if="{{currentCharater == value.charater}}" data-id="{{value._id}}" value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
       </view>
     </mp-cells>
+    <mp-actionSheet bindactiontap="sheetClick" show="{{actionSheet.showActionSheet}}" actions="{{actionSheet.groups}}" title="请选择你要做什么">
+    </mp-actionSheet>
   </view>
 
   <view class="page__ft">
