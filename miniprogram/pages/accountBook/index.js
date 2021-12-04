@@ -40,7 +40,7 @@ Page({
     detailCount: [],
     // action sheet
     actionSheet: {
-      showActionSheet: false,
+      show: false,
       groups: [{
           text: '修改',
           value: 'update'
@@ -52,8 +52,19 @@ Page({
         }
       ],
       selected: '',
+    },
+    dialog: {
+      show: false,
+      buttons: [{
+        text: '取消'
+      }, {
+        text: '确定',
+        type: 'warn'
+      }]
+    },
+    loading: {
+      show: false,
     }
-
   },
   watch: {
     currentCharater: function (newVal) {
@@ -113,7 +124,9 @@ Page({
       data: {}
     }).then(res => {
       console.log(res);
+      this.setLoading(true);
       if (res.result.success) {
+        this.setLoading(false);
         let detailCount = {};
         for (let x in res.result.data) {
           let item = res.result.data[x];
@@ -132,13 +145,39 @@ Page({
     });
   },
   itemClick(e) {
-    this.setData({'actionSheet.selected': e.currentTarget.dataset.id, 'actionSheet.showActionSheet': true})
+    this.setData({'actionSheet.selected': e.currentTarget.dataset.id, 'actionSheet.show': true})
     console.log(this.data.actionSheet)
+  },
+  dialogClick(e) {
+    console.log(e);
+    if (e.detail.item.text == '确定') {
+      this.setLoading(true);
+      wx.cloud.callFunction({
+        name: "deleteItem",
+        data: {
+          id: this.data.actionSheet.selected,
+        }
+      }).then(res => {
+        this.setLoading(false);
+        console.log(res);
+        if (res.result.success) {
+          
+        } else {
+          wx.showToast({
+            title: '删除失败',
+            icon: 'error'
+          });
+        }
+      });
+    }
+    this.setData({
+      'dialog.show': false,
+    });
   },
   sheetClick(e) {
     console.log(e)
     this.setData({
-      'actionSheet.showActionSheet': false
+      'actionSheet.show': false
     });
     switch (e.detail.value) {
       case 'update':
@@ -152,6 +191,7 @@ Page({
         });
         break;
       case 'delete':
+        this.setData({'dialog.show': true});
         break;
       default:
         break;
@@ -162,6 +202,12 @@ Page({
     getApp().setWatcher(this);
     console.log(options);
     this.reloadPage();
+  },
+  setLoading(status) {
+    if (status) {
+      wx.showToast({title: '加载中', icon: 'loading', duration: 10000});
+    } else {
+      wx.hideToast();
+    }
   }
-
 });

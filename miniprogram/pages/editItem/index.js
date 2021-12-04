@@ -102,7 +102,7 @@ Page({
           console.log(res);
           if (res.result.success) {} else {
             wx.showToast({
-              title: '失败:' + res.result.message,
+              title: '失败:',
               icon: 'error'
             });
           }

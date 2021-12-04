@@ -23,6 +23,7 @@
     "mp-toptips": "weui-miniprogram/toptips/toptips",
     "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group",
     "mp-checkbox": "weui-miniprogram/checkbox/checkbox",
-    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
+    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
+    "mp-dialog": "weui-miniprogram/dialog/dialog"
   }
 }

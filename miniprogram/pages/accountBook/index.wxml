@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="page">
   <navigator url='/pages/editItem/index?charater={{currentCharater}}'>
-    <button  wx:if="{{currentCharater != 'total'}}" class="btn-yellow">+</button>
+    <button wx:if="{{currentCharater != 'total'}}" class="btn-yellow">+</button>
   </navigator>
   <mp-cells ext-class="my-cells" title="总概览">
     <mp-cell value="总金额" footer="{{totalCount.totalFund/100}}"></mp-cell>
@@ -16,12 +16,24 @@
         <mp-cell bindtap="itemClick" wx:if="{{currentCharater == value.charater}}" data-id="{{value._id}}" value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
       </view>
     </mp-cells>
-    <mp-actionSheet bindactiontap="sheetClick" show="{{actionSheet.showActionSheet}}" actions="{{actionSheet.groups}}" title="请选择你要做什么">
-    </mp-actionSheet>
+
   </view>
 
   <view class="page__ft">
     <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{tarbarPros}}" bindchange="navbarChanged"></mp-tabbar>
   </view>
 
+
+  <!-- delete dialog -->
+  <mp-dialog ext-class="dialog" show="{{dialog.show}}" bindbuttontap="dialogClick" buttons="{{dialog.buttons}}">
+    <view>
+      <view class="title">
+        是否确认删除？
+      </view>
+    </view>
+  </mp-dialog>
+
+  <!-- sheet -->
+  <mp-actionSheet bindactiontap="sheetClick" show="{{actionSheet.show}}" actions="{{actionSheet.groups}}" title="请选择你要做什么">
+  </mp-actionSheet>
 </view>
