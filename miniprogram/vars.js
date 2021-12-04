@@ -13,6 +13,12 @@ const CHARATERS = {
     }
 }
 
+const FUND_TYPE = {
+    LIQUID: "liquid",
+    ILLIQUID: "illiquid"
+}
+
 module.exports = [
-    CHARATERS
+    CHARATERS,
+    FUND_TYPE
 ]

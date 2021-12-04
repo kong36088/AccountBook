@@ -5,25 +5,19 @@ cloud.init({
 });
 
 const db = cloud.database();
+const _ = db.command;
 
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
   try {
-    let keys = ['charater'];
-    for (let k in keys) {
-      let key = keys[k];
-      if (!event.hasOwnProperty(key) || !event[key]) {
-        return {
-          success: false,
-          message: `missing param '${key}'`
-        }
-      }
-    }
-    let charater = event['charater'];
+    let condition = {
+      // charater: _.in(["dog", "pig"])
+    };
+    if (event.hasOwnProperty('charater') && event['charater']) {
+      condition.charater = event['charater']
+    };
     let result;
-    await db.collection('account').where({
-      charater: charater,
-    }).get().then(res => {
+    await db.collection('account').where(condition).get().then(res => {
       result = res.data;
     });
     return {
