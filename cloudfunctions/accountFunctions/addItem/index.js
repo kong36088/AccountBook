@@ -22,13 +22,17 @@ exports.main = async (event, context) => {
       data[key] = event[key]
     }
 
+    let id;
     await db.collection('account').add({
       // data 字段表示需新增的 JSON 数据
       data: data
+    }).then(res => {
+      id = res._id;
     });
     return {
       success: true,
-      message: 'ok'
+      message: 'ok',
+      data: {'id': id},
     };
   } catch (e) {
     console.log(e)

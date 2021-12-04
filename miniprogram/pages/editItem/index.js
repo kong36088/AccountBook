@@ -89,6 +89,7 @@ Page({
         }
       } else {
         let action = this.data.form.id ? 'updateItem' : 'addItem';
+        getApp().setLoading(true);
         wx.cloud.callFunction({
           name: action,
           data: {
@@ -99,17 +100,27 @@ Page({
             charater: charater,
           },
         }).then(res => {
-          console.log(res);
-          if (res.result.success) {} else {
+          getApp().setLoading(false);
+          if (res.result.success) {
+            let id = res.result.data.id;
+            this.setData({'form.id': id});
+            let pages = getCurrentPages();
+            let prevPage = pages[pages.length - 2];
+            let form = this.data.form;
+            form.value *= 100;
+            prevPage.setData({
+              [`detailCount.${id}`]: form, 
+            })
+          } else {
             wx.showToast({
-              title: '失败:',
+              title: '失败',
               icon: 'error'
             });
           }
+          wx.navigateBack({
+            delta: 1
+          })
         });
-        wx.navigateBack({
-          delta: 1
-        })
       }
     })
   },

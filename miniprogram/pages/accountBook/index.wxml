@@ -13,7 +13,7 @@
     <!-- <view class="divdeLine"></view> -->
     <mp-cells ext-class="my-cells" title="明细">
       <view wx:for="{{detailCount}}" wx:key="item" wx:for-item="value">
-        <mp-cell bindtap="itemClick" wx:if="{{currentCharater == value.charater}}" data-id="{{value._id}}" value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
+        <mp-cell bindtap="itemClick" wx:if="{{currentCharater == value.charater}}" data-id="{{value.id}}" value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
       </view>
     </mp-cells>
 

@@ -62,5 +62,12 @@ App({
             return val;
         }
     })
+  },
+  setLoading(status) {
+    if (status) {
+      wx.showToast({title: '加载中', icon: 'loading', duration: 10000});
+    } else {
+      wx.hideToast();
+    }
   }
 });

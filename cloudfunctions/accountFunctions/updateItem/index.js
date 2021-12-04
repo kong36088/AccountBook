@@ -31,14 +31,20 @@ exports.main = async (event, context) => {
     if (!data) {
       return {
         success: true,
-        message: 'ok'
+        message: 'ok',
+        data: {
+          id: docId
+        }
       };
     }
 
     await db.collection('account').doc(docId).update({data: data}).then(res => {});
     return {
       success: true,
-      message: 'ok'
+      message: 'ok',
+      data: {
+        id: docId
+      }
     };
   } catch (e) {
     console.log(e)

@@ -37,7 +37,7 @@ Page({
       liquidFund: 0,
       illiquidFund: 0
     },
-    detailCount: [],
+    detailCount: {},
     // action sheet
     actionSheet: {
       show: false,
@@ -61,9 +61,6 @@ Page({
         text: '确定',
         type: 'warn'
       }]
-    },
-    loading: {
-      show: false,
     }
   },
   watch: {
@@ -124,13 +121,13 @@ Page({
       data: {}
     }).then(res => {
       console.log(res);
-      this.setLoading(true);
+      getApp().setLoading(true);
       if (res.result.success) {
-        this.setLoading(false);
+        getApp().setLoading(false);
         let detailCount = {};
         for (let x in res.result.data) {
           let item = res.result.data[x];
-          detailCount[item._id] = item;
+          detailCount[item.id] = item;
         }
         this.setData({
           'detailCount': detailCount,
@@ -145,23 +142,28 @@ Page({
     });
   },
   itemClick(e) {
+    console.log(e)
     this.setData({'actionSheet.selected': e.currentTarget.dataset.id, 'actionSheet.show': true})
-    console.log(this.data.actionSheet)
   },
   dialogClick(e) {
     console.log(e);
     if (e.detail.item.text == '确定') {
-      this.setLoading(true);
+      getApp().setLoading(true);
+      let id = this.data.actionSheet.selected;
       wx.cloud.callFunction({
         name: "deleteItem",
         data: {
-          id: this.data.actionSheet.selected,
+          id: id,
         }
       }).then(res => {
-        this.setLoading(false);
+        getApp().setLoading(false);
         console.log(res);
         if (res.result.success) {
-          
+          let detailCount = this.data.detailCount;
+          delete detailCount[id];
+          this.setData({
+            'detailCount': detailCount
+          });
         } else {
           wx.showToast({
             title: '删除失败',
@@ -203,11 +205,4 @@ Page({
     console.log(options);
     this.reloadPage();
   },
-  setLoading(status) {
-    if (status) {
-      wx.showToast({title: '加载中', icon: 'loading', duration: 10000});
-    } else {
-      wx.hideToast();
-    }
-  }
 });

@@ -18,6 +18,10 @@ exports.main = async (event, context) => {
     };
     let result;
     await db.collection('account').where(condition).get().then(res => {
+      for (let x in res.data) {
+        res.data[x].id = res.data[x]._id;
+        delete res.data[x]._id;
+      }
       result = res.data;
     });
     return {
