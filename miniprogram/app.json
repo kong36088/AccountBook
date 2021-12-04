@@ -24,6 +24,7 @@
     "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group",
     "mp-checkbox": "weui-miniprogram/checkbox/checkbox",
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
-    "mp-dialog": "weui-miniprogram/dialog/dialog"
+    "mp-dialog": "weui-miniprogram/dialog/dialog",
+    "mp-icon": "weui-miniprogram/icon/icon"
   }
 }

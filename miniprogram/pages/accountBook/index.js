@@ -28,10 +28,16 @@ const tarbarPros = [{
   }
 ];
 
+const iconPath = {
+  [CHARATERS.dog.value]: "/images/狗.png",
+  [CHARATERS.pig.value]: "/images/猪.png",
+};
+
 Page({
   data: {
     currentCharater: CHARATERS.dog.value,
     tarbarPros: tarbarPros,
+    iconPath: iconPath,
     totalCount: {
       totalFund: 0,
       liquidFund: 0,

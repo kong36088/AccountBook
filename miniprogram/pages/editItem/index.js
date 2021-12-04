@@ -57,7 +57,7 @@ Page({
         checked: true
       },
       {
-        name: '非流动',
+        name: '固定',
         value: FUND_TYPE.ILLIQUID
       }
     ]

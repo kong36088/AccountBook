@@ -39,3 +39,11 @@
   font-size: 24rpx;
   margin-top: 25%;
 }
+
+.cell-icon {
+  display: inline-block;
+  font-size: 18rpx;
+  width: 1.7em;
+  height: 1.7em;
+  margin-right: 6rpx;
+}

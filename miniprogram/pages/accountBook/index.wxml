@@ -4,16 +4,32 @@
     <button wx:if="{{currentCharater != 'total'}}" class="btn-yellow">+</button>
   </navigator>
   <mp-cells ext-class="my-cells" title="总概览">
-    <mp-cell value="总金额" footer="{{totalCount.totalFund/100}}"></mp-cell>
-    <mp-cell value="流动资金" footer="{{totalCount.liquidFund/100}}"></mp-cell>
-    <mp-cell value="非流动资金" footer="{{totalCount.illiquidFund/100}}"></mp-cell>
+    <mp-cell>
+      <view style="color:gray;">总金额</view>
+      <view slot="footer" style="color:black;">{{totalCount.totalFund/100}}</view>
+    </mp-cell>
+    <mp-cell>
+      <view style="color:gray;">流动资金</view>
+      <view slot="footer" style="color:black;">{{totalCount.liquidFund/100}}</view>
+    </mp-cell>
+    <mp-cell>
+      <view style="color:gray;">固定资金</view>
+      <view slot="footer" style="color:black;">{{totalCount.illiquidFund/100}}</view>
+    </mp-cell>
   </mp-cells>
 
   <view class="page__bd">
     <!-- <view class="divdeLine"></view> -->
     <mp-cells ext-class="my-cells" title="明细">
       <view wx:for="{{detailCount}}" wx:key="item" wx:for-item="value">
-        <mp-cell bindtap="itemClick" wx:if="{{currentCharater == value.charater}}" data-id="{{value.id}}" value="{{value.item}}" footer="{{value.value/100}}"></mp-cell>
+        <mp-cell bindtap="itemClick" wx:if="{{currentCharater == value.charater || currentCharater == 'total'}}" data-id="{{value.id}}">
+          <view style="color:black;">
+            <image class="cell-icon" src="{{iconPath[value.charater]}}" role="img"></image>{{value.item}}
+          </view>
+          <view slot="footer" style="color:black;">
+            <view style="font-size: 10px;display: inline-block;">{{value.type == 'liquid' ? '[流动]': '[固定]'}}</view>{{value.value/100}}
+          </view>
+        </mp-cell>
       </view>
     </mp-cells>
 
