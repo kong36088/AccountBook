@@ -40,6 +40,13 @@ Page({
           {
             maxlength: 12,
             message: "金额长度过长"
+          },
+          {
+            validator(rule, value, param, models) {
+              if (!/^(([^0][0-9]+|0)\.([0-9]{1,2}))$/i.test(value)) {
+                return "金额必须是数字，且小数点后不能超过2位"
+              }
+            }
           }
         ]
       },
